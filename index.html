@@ -969,6 +969,10 @@ a {
   text-transform: uppercase;
   color: color-mix(in oklab, var(--color-wine) 55%, white);
 }
+@media (max-width: 600px) {
+  .archive-foot { justify-content: center; }
+  .archive-foot .left { display: none; }
+}
 
 /* ---------- Responsive ---------- */
 @media (max-width: 980px) {
@@ -1376,13 +1380,13 @@ function Hero() {
               <span className="hl">ex-ad-creative turned<br className="mobile-br" /> stAI-at-home-mom.</span>
             </h1>
             <p className="hero-subline">
-              building apps* between naps.
+              building apps* during naps.
               <br /><small style={{fontSize: "0.45em", opacity: 0.75, fontStyle: "normal", fontFamily: "var(--font-ui)", letterSpacing: "0.02em", fontWeight: 700}}>*and other stuff.</small>
             </p>
 
             <aside className="hero-card">
               <span className="label">from my kitchen table</span>
-              <p>i was in advertising for a decade. now i use ai to build real things for my family, like apps, activities, and tools that optimize my life as a busy mom. i film it so other moms can see what's possible.</p>
+              <p>i was in advertising for a decade. now i use ai to build real things — activities for my family, things that make our days a little easier, &amp; whatever else i dream up. i film it so other moms can see what's possible.</p>
               <p className="hero-card-sig" style={{color:"var(--color-lilac)"}}>
                 — chandler
               </p>
@@ -1396,11 +1400,7 @@ function Hero() {
           </aside>
         </div>
       </div>
-      <div className="hero-foot">
-        <div className="scroll-hint">
-          <span className="arrow"></span>
-        </div>
-      </div>
+
     </section>);
 
 }
@@ -1559,7 +1559,7 @@ function Work() {
       prose1: "Nine years of writing creative briefs translates — almost too well — into prompting claude. a side-by-side of a real agency brief and the prompt it became, plus what i kept and what i had to unlearn.",
       prose2: "It is a video, it is also a case study, and it is the most-watched thing i have ever made on the internet.",
       meta: [
-        { k: "CATEGORY", v: "TUTORIAL", kind: "tutorial" },
+        { k: "CATEGORY", v: "DEMO", kind: "tutorial" },
         { k: "FORMAT", v: "VIDEO" },
         { k: "PUBLISHED", v: "MAY 07 2026" },
         { k: "WHERE", v: "youtube ↗", href: "https://youtube.com/shorts/bhvOJ6Wy_0I" },
@@ -1573,7 +1573,7 @@ function Work() {
   ];
 
   const archive = [
-    { no: "01", kind: "tutorial", kindLabel: "TUTORIAL",   title: "reminders that",           italic: "organize themselves.", date: "MAY · 2026", where: "VIDEO", url: "https://youtube.com/shorts/bhvOJ6Wy_0I" },
+    { no: "01", kind: "tutorial", kindLabel: "DEMO",   title: "reminders that",           italic: "organize themselves.", date: "MAY · 2026", where: "VIDEO", url: "https://youtube.com/shorts/bhvOJ6Wy_0I" },
     { no: "02", kind: "case",     kindLabel: "CASE STUDY", title: "built for a kid who loves", italic: "collecting bugs.",     date: "MAY · 2026", where: "VIDEO", url: "https://youtube.com/shorts/ZFdXsrJauJk" },
   ];
   const PAGE = 10;
@@ -1645,9 +1645,9 @@ function Work() {
           ))}
         </ol>
         <div className="archive-legend">
-          <span className="legend-item"><span className="legend-pip tutorial-pip"></span>TUTORIAL</span>
+          <span className="legend-item"><span className="legend-pip tutorial-pip"></span>DEMO</span>
           <span className="legend-item"><span className="legend-pip case-pip"></span>CASE STUDY</span>
-          <span className="legend-item"><span className="legend-pip demo-pip"></span>DEMO</span>
+          <span className="legend-item"><span className="legend-pip demo-pip"></span>HALF-BAKED IDEAS</span>
         </div>
 
         <div className="archive-foot">
