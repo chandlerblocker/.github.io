@@ -404,6 +404,16 @@ a {
   display: flex; align-items: center; justify-content: center;
 }
 
+/* Mobile animations */
+@keyframes slowZoom {
+  from { transform: scale(1.06); }
+  to   { transform: scale(1.0); }
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
 /* Mobile — Option B: portrait fills screen */
 @media (max-width: 768px) {
 
@@ -430,6 +440,7 @@ a {
     height: 100%;
     object-fit: cover;
     object-position: center top;
+    animation: slowZoom 2.2s cubic-bezier(.25,.46,.45,.94) both;
   }
 
   /* Dark gradient at bottom for text readability */
@@ -444,14 +455,13 @@ a {
     z-index: 2;
   }
 
-  /* Logo stays on top */
-  .hero-logo-wrap { z-index: 3; padding: 24px 20px 0; }
+  /* Logo stays on top — fades in first */
+  .hero-logo-wrap { z-index: 3; padding: 24px 20px 0; animation: fadeUp 0.7s ease both 0.2s; }
   .hero-logo { max-width: 90vw; }
 
   /* Callout text — always visible, stacked at bottom, no boxes */
   .hero-callout {
     position: absolute !important;
-    opacity: 1 !important;
     pointer-events: none;
     border: none !important;
     background: none !important;
@@ -465,7 +475,10 @@ a {
   }
   .hero-callout::after, .hero-callout::before { display: none; }
   .hero-callout-left  { bottom: 198px; left: 24px; top: auto !important; right: auto !important; text-align: left; }
-  .hero-callout-right { bottom: 168px; left: 24px; top: auto !important; right: auto !important; text-align: left; }
+  .hero-callout-right {
+    bottom: 168px; left: 24px; top: auto !important; right: auto !important; text-align: left;
+    animation: fadeUp 0.7s ease both 0.6s;
+  }
 
   /* Terminal — show as plain bio text, no window frame */
   .hero-terminal {
@@ -489,17 +502,24 @@ a {
     color: #fff !important;
     line-height: 1.7 !important;
   }
-  .terminal-body p { margin: 0 !important; }
+  .terminal-body p { margin: 0 !important; animation: fadeUp 0.6s ease both; }
   .terminal-indent { color: #fff !important; padding-left: 0 !important; }
   .terminal-body p:nth-child(1),
   .terminal-body p:nth-child(2) { display: none; }
   .terminal-now { display: none; }
   .terminal-prompt, .terminal-cursor { display: none; }
+  .terminal-body p:nth-child(3) { animation-delay: 0.85s; }
+  .terminal-body p:nth-child(4) { animation-delay: 1.05s; }
+  .terminal-body p:nth-child(5) { animation-delay: 1.2s; }
+  .terminal-body p:nth-child(6) { animation-delay: 1.35s; }
+  .terminal-body p:nth-child(7) { animation-delay: 1.5s; }
+  .terminal-body p:last-child   { display: none; }
 
-  /* Hide socks, hover zones, arrow */
+  /* Hide socks, hover zones, arrow, left callout */
   .hero-socks,
   .hero-arrow-wrap,
-  .hover-zone { display: none; }
+  .hover-zone,
+  .hero-callout-left { display: none; }
 }
 
 
