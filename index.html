@@ -1467,10 +1467,12 @@ function Hero() {
       });
     }
     measure();
+    // Re-measure after fonts + images finish loading
+    window.addEventListener('load', measure);
     const ro = new ResizeObserver(measure);
     if (heroRef.current) ro.observe(heroRef.current);
     window.addEventListener('resize', measure);
-    return () => { ro.disconnect(); window.removeEventListener('resize', measure); };
+    return () => { ro.disconnect(); window.removeEventListener('resize', measure); window.removeEventListener('load', measure); };
   }, []);
 
   const isMobile = typeof window !== 'undefined' && window.innerWidth < 769;
@@ -1501,7 +1503,7 @@ function Hero() {
 
       {/* Portrait — hover zones trigger callouts */}
       <div className="hero-portrait-wrap" ref={portraitRef}>
-        <img src="assets/portrait.png" alt="chandler" />
+        <img src="assets/portrait.png" alt="chandler" onLoad={() => { if (!heroRef.current || !portraitRef.current) return; const h = heroRef.current.getBoundingClientRect(); const p = portraitRef.current.getBoundingClientRect(); setPRect({ left: p.left-h.left, right: p.right-h.left, leftY: (p.top-h.top)+p.height*0.20, rightY: (p.top-h.top)+p.height*0.50, heroW: h.width }); }} />
         <div className="hover-zone hover-zone-baby"
           onMouseEnter={() => setHovered(true)}
           onMouseLeave={() => setHovered(false)} />
