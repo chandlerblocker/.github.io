@@ -404,16 +404,101 @@ a {
   display: flex; align-items: center; justify-content: center;
 }
 
-/* Mobile */
+/* Mobile — Option B: portrait fills screen */
 @media (max-width: 768px) {
-  .hero-callout { position: static; max-width: 100%; margin: 8px 16px; border: none; padding: 0; font-size: 12px; }
+
+  /* Hero takes full viewport height */
+  .hero {
+    min-height: 100svh;
+    height: 100svh;
+  }
+
+  /* Portrait fills the whole hero */
+  .hero-portrait-wrap {
+    position: absolute !important;
+    inset: 0 !important;
+    bottom: auto !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    transform: none !important;
+    z-index: 1 !important;
+  }
+  .hero-portrait-wrap:hover { transform: none !important; }
+  .hero-portrait-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+  }
+
+  /* Dark gradient at bottom for text readability */
+  .hero-portrait-wrap::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom,
+      rgba(0,0,0,0) 35%,
+      rgba(0,0,0,0.38) 100%
+    );
+    z-index: 2;
+  }
+
+  /* Logo stays on top */
+  .hero-logo-wrap { z-index: 3; padding: 24px 20px 0; }
+  .hero-logo { max-width: 90vw; }
+
+  /* Callout text — always visible, stacked at bottom, no boxes */
+  .hero-callout {
+    position: absolute !important;
+    opacity: 1 !important;
+    pointer-events: none;
+    border: none !important;
+    background: none !important;
+    color: #fff !important;
+    font-size: 14px !important;
+    max-width: 80% !important;
+    padding: 0 !important;
+    z-index: 4;
+    transform: none !important;
+    transition: none !important;
+  }
   .hero-callout::after, .hero-callout::before { display: none; }
-  .hero-callout-left, .hero-callout-right { text-align: left; }
-  .hero-portrait-wrap { height: 70%; }
-  .hero-terminal { left: 2%; bottom: 4%; width: 220px; }
-  .hero-terminal .terminal-body { font-size: 9px; padding: 8px 10px; }
-  .hero-socks { right: 2%; bottom: 6%; }
-  .sock-icon { width: 40px; }
+  .hero-callout-left  { bottom: 198px; left: 24px; top: auto !important; right: auto !important; text-align: left; }
+  .hero-callout-right { bottom: 168px; left: 24px; top: auto !important; right: auto !important; text-align: left; }
+
+  /* Terminal — show as plain bio text, no window frame */
+  .hero-terminal {
+    position: absolute !important;
+    bottom: 0 !important;
+    left: 24px !important;
+    right: 24px !important;
+    top: auto !important;
+    width: auto !important;
+    background: none !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    z-index: 4;
+    padding: 0 0 32px !important;
+  }
+  .terminal-titlebar { display: none; }
+  .terminal-body {
+    font-size: 13px !important;
+    padding: 0 !important;
+    background: none !important;
+    color: #fff !important;
+    line-height: 1.7 !important;
+  }
+  .terminal-body p { margin: 0 !important; }
+  .terminal-indent { color: #fff !important; padding-left: 0 !important; }
+  .terminal-body p:nth-child(1),
+  .terminal-body p:nth-child(2) { display: none; }
+  .terminal-prompt, .terminal-cursor { display: none; }
+
+  /* Hide socks, hover zones, arrow */
+  .hero-socks,
+  .hero-arrow-wrap,
+  .hover-zone { display: none; }
 }
 
 
@@ -456,9 +541,9 @@ a {
   margin-bottom: 0;
   align-self: start;
 }
-.work-masthead .section-eyebrow .rule { background: var(--color-arctic); }
+.work-masthead .section-eyebrow .rule { background: var(--color-ruby); }
 .work-masthead .section-eyebrow .num  { background: var(--color-arctic); color: var(--color-wine); }
-.index-header .section-eyebrow .rule { background: var(--color-lilac); }
+.index-header .section-eyebrow .rule { background: var(--color-ruby); }
 .index-header .section-eyebrow .num  { background: var(--color-lilac); color: var(--color-wine); }
 .work-masthead-eyebrow {
   font-family: var(--font-pixel);
@@ -568,13 +653,13 @@ a {
   max-width: 360px;
   width: 100%;
   margin: 0 auto;
-  border: 2.5px solid var(--color-blue);
-  box-shadow: 8px 8px 0 var(--color-blue);
-  background: var(--color-blue);
+  border: 2.5px solid var(--color-arctic);
+  box-shadow: 8px 8px 0 var(--color-arctic);
+  background: var(--color-arctic);
   overflow: hidden;
   transition: transform var(--dur) var(--ease-out), box-shadow var(--dur) var(--ease-out);
 }
-.spread-video:hover { transform: translate(-2px, -2px); box-shadow: 12px 12px 0 var(--color-blue); }
+.spread-video:hover { transform: translate(-2px, -2px); box-shadow: 12px 12px 0 var(--color-arctic); }
 .spread-video:active { transform: translate(4px, 4px); box-shadow: 2px 2px 0 var(--color-blue); }
 .spread-video .surface {
   position: absolute; inset: 0;
@@ -612,8 +697,8 @@ a {
   transform: translate(-50%, -50%);
   width: 96px; height: 96px;
   background: rgba(255,255,255,0.82);
-  border: 2.5px solid var(--color-blue);
-  box-shadow: 4px 4px 0 var(--color-blue);
+  border: 2.5px solid var(--color-arctic);
+  box-shadow: 4px 4px 0 var(--color-arctic);
   display: flex; align-items: center; justify-content: center;
   cursor: pointer;
   z-index: 2;
@@ -621,7 +706,7 @@ a {
 }
 .spread-video .play-button:hover {
   transform: translate(calc(-50% - 2px), calc(-50% - 2px));
-  box-shadow: 6px 6px 0 var(--color-blue);
+  box-shadow: 6px 6px 0 var(--color-arctic);
 }
 .spread-video .play-button:active {
   transform: translate(calc(-50% + 4px), calc(-50% + 4px));
@@ -691,6 +776,7 @@ a {
 .spread-caption .swatch[data-kind="tutorial"] { background: var(--color-chartreuse); }
 .spread-caption .swatch[data-kind="demo"]     { background: #e8afc8; }
 .spread-caption .swatch[data-kind="case"]     { background: #adcce9; }
+.spread-caption .swatch[data-kind="app"]      { background: var(--color-ruby); }
 
 /* INFO */
 .spread-info {
@@ -794,7 +880,7 @@ a {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 18px;
-  border-top: 2.5px solid var(--color-wine);
+  border-top: 2.5px solid var(--color-ruby);
   padding-top: 16px;
 }
 .spread-meta .cell {
@@ -804,8 +890,8 @@ a {
   font-family: var(--font-pixel);
   font-size: 11px;
   letter-spacing: 0.08em;
-  color: var(--color-chartreuse);
-  background: var(--color-wine);
+  color: var(--color-ruby);
+  background: var(--color-chartreuse);
   width: fit-content;
   padding: 1px 5px;
   text-transform: uppercase;
@@ -902,6 +988,7 @@ a {
 .archive-row.tutorial:hover { background: #f5f9d6; }
 .archive-row.demo:hover     { background: #f9f0f5; }
 .archive-row.case:hover     { background: #eef4fa; }
+.archive-row.app:hover      { background: #f9e8ec; }
 .archive-row .num {
   font-family: var(--font-pixel);
   font-size: 14px;
@@ -928,6 +1015,7 @@ a {
 .archive-row .kind.tutorial .pip { background: var(--color-chartreuse); }
 .archive-row .kind.demo     .pip { background: #e8afc8; }
 .archive-row .kind.case     .pip { background: #adcce9; }
+.archive-row .kind.app      .pip { background: var(--color-ruby); }
 .archive-row .title {
   font-family: var(--font-display);
   font-size: clamp(22px, 2.1vw, 28px);
@@ -948,8 +1036,9 @@ a {
   padding: 0 4px;
 }
 .archive-row.tutorial:hover .title em { background: var(--color-chartreuse); color: var(--color-wine); }
-.archive-row.demo:hover     .title em { background: #e8afc8; color: var(--color-wine); }
-.archive-row.case:hover     .title em { background: #adcce9; color: var(--color-wine); }
+.archive-row.demo:hover     .title em { background: #e8afc8;                color: var(--color-wine); }
+.archive-row.case:hover     .title em { background: #adcce9;                color: var(--color-wine); }
+.archive-row.app:hover      .title em { background: var(--color-ruby);      color: #fff; }
 .archive-row .date {
   font-family: var(--font-ui);
   font-size: 12px;
@@ -967,8 +1056,8 @@ a {
 .archive-row .arrow {
   font-family: var(--font-pixel);
   font-size: 22px;
-  color: var(--color-wine);
-  transition: transform var(--dur-fast) var(--ease-out), color var(--dur-fast) var(--ease-out);
+  color: var(--color-blue);
+  transition: transform var(--dur-fast) var(--ease-out);
   text-align: right;
 }
 .archive-row:hover .arrow {
@@ -1166,6 +1255,7 @@ a {
   .legend-pip.tutorial-pip { background: var(--color-chartreuse); }
   .legend-pip.case-pip     { background: var(--color-arctic); }
   .legend-pip.demo-pip     { background: var(--color-lilac); }
+  .legend-pip.app-pip      { background: var(--color-ruby); }
 
   /* show pip in archive rows, hide label text */
   .archive-row .kind { display: flex !important; align-items: center; font-size: 0; width: auto; }
@@ -1230,7 +1320,7 @@ a {
   letter-spacing: 0.04em;
 }
 .section-eyebrow--dark { color: var(--color-chartreuse); }
-.section-eyebrow--dark .rule { background: var(--color-chartreuse); }
+.section-eyebrow--dark .rule { background: var(--color-ruby); }
 .section-eyebrow--dark .num { background: var(--color-chartreuse); color: var(--color-wine); }
 .section-eyebrow--dark .label { color: var(--color-wine); }
 
@@ -1548,7 +1638,7 @@ function Hero() {
         <div className="terminal-body">
           <p><span className="terminal-prompt">chandler@ai-at-home-mom:~$</span> cat about.txt</p>
           <p>i was in advertising for a decade.</p>
-          <p>now i use ai to build real things —</p>
+          <p>i use ai to build real things —</p>
           <p className="terminal-indent">activities for my family,</p>
           <p className="terminal-indent">things that make our days a little easier,</p>
           <p className="terminal-indent">&amp; whatever else i dream up.</p>
@@ -1658,7 +1748,7 @@ function Spread({ data, side }) {
               <span className="val">
                 {m.kind
                   ? <span style={{display:"inline-flex",alignItems:"center",gap:"7px"}}>
-                      <span style={{display:"inline-block",width:"9px",height:"9px",background: m.kind==="case"?"#adcce9": m.kind==="demo"?"#e8afc8":"var(--color-chartreuse)",border:"1px solid var(--color-wine)",flexShrink:0}}></span>
+                      <span style={{display:"inline-block",width:"9px",height:"9px",background: m.kind==="case"?"#adcce9": m.kind==="demo"?"#e8afc8": m.kind==="app"?"var(--color-ruby)":"var(--color-chartreuse)",border:"1px solid var(--color-wine)",flexShrink:0}}></span>
                       {m.v}
                     </span>
                   : m.href
@@ -1736,7 +1826,7 @@ function Work() {
   ];
 
   const archive = [
-    { no: "01", kind: "tutorial", kindLabel: "DEMO",       title: "download my",              italic: "bug jar app.",                          date: "MAY · 2026", where: "APP",   url: "https://bug-jar.vercel.app/login" },
+    { no: "01", kind: "app",      kindLabel: "APP",        title: "download my",              italic: "bug jar app.",                          date: "MAY · 2026", where: "APP",   url: "https://bug-jar.vercel.app/login" },
     { no: "02", kind: "tutorial", kindLabel: "DEMO",       title: "reminders that",           italic: "organize themselves.",                  date: "MAY · 2026", where: "VIDEO", url: "https://youtube.com/shorts/bhvOJ6Wy_0I" },
     { no: "03", kind: "case",     kindLabel: "CASE STUDY", title: "built for a kid who loves", italic: "collecting bugs.",                      date: "MAY · 2026", where: "VIDEO", url: "https://youtube.com/shorts/ZFdXsrJauJk" },
   ];
@@ -1812,6 +1902,7 @@ function Work() {
           <span className="legend-item"><span className="legend-pip tutorial-pip"></span>DEMO</span>
           <span className="legend-item"><span className="legend-pip case-pip"></span>CASE STUDY</span>
           <span className="legend-item"><span className="legend-pip demo-pip"></span>HALF-BAKED IDEAS</span>
+          <span className="legend-item"><span className="legend-pip app-pip"></span>APP</span>
         </div>
 
         <div className="archive-foot">
