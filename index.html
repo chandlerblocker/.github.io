@@ -493,6 +493,7 @@ a {
   .terminal-indent { color: #fff !important; padding-left: 0 !important; }
   .terminal-body p:nth-child(1),
   .terminal-body p:nth-child(2) { display: none; }
+  .terminal-now { display: none; }
   .terminal-prompt, .terminal-cursor { display: none; }
 
   /* Hide socks, hover zones, arrow */
@@ -1638,7 +1639,7 @@ function Hero() {
         <div className="terminal-body">
           <p><span className="terminal-prompt">chandler@ai-at-home-mom:~$</span> cat about.txt</p>
           <p>i was in advertising for a decade.</p>
-          <p>i use ai to build real things —</p>
+          <p><span className="terminal-now">now </span>i use ai to build real things —</p>
           <p className="terminal-indent">activities for my family,</p>
           <p className="terminal-indent">things that make our days a little easier,</p>
           <p className="terminal-indent">&amp; whatever else i dream up.</p>
