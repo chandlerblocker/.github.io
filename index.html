@@ -136,196 +136,286 @@ a {
 }
 .minibar-jump a:hover { color: var(--color-blue); }
 
-/* ============== HERO (preserved from prior work) ============== */
+/* ============== HERO v2 ============== */
 .hero {
   min-height: calc(100vh - 72px);
   position: relative;
-  display: flex; flex-direction: column;
-  padding: 36px 0 44px;
-  overflow: hidden;
-  background:
-    linear-gradient(180deg, rgba(35,55,110,.40) 0%, rgba(35,55,110,.30) 50%, rgba(35,55,110,.45) 100%),
-    url("assets/bg-texture.jpg") center/cover;
-  background-color: #2c4f88;
-  background-blend-mode: multiply, normal;
-}
-.hero::before {
-  content: "";
-  position: absolute; inset: 0;
-  background: radial-gradient(ellipse at 30% 20%, rgba(190,204,36,.10), transparent 60%);
-  pointer-events: none;
-}
-.hero > * { position: relative; z-index: 1; }
-.hero-top {
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 0 88px 0;
-  max-width: 1240px;
-  margin-left: auto;
-  margin-right: auto;
-  width: 100%;
-  box-sizing: border-box;
-}
-.hero-top-meta {
-  font-family: var(--font-pixel);
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  color: #fff;
-  display: inline-flex; align-items: center; gap: 8px;
-}
-.hero-top-meta .swatch {
-  display: inline-block;
-  width: 10px; height: 10px;
   background: var(--color-chartreuse);
-  border: 1.5px solid #fff;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
-.hero-top-now {
-  margin-left: auto;
-  display: inline-flex; align-items: center; gap: 10px;
-  font-family: var(--font-ui);
-  font-size: 12px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  font-weight: 600;
-  color: #fff;
-}
-.hero-top-now .dot {
-  display: inline-block;
-  width: 8px; height: 8px;
-  border-radius: 50%;
-  background: var(--dot-color, var(--color-chartreuse));
-  box-shadow: 0 0 0 3px var(--dot-halo, rgba(190,204,36,.25));
-  animation: pulse 1.6s ease-in-out infinite;
-  transition: background var(--dur) var(--ease-out), box-shadow var(--dur) var(--ease-out);
-}
-.hero-top-now[data-state="sleeping"]     { --dot-color: #ff3b30; --dot-halo: rgba(255, 59, 48, 0.28); }
-.hero-top-now[data-state="napping"]      { --dot-color: #29c463; --dot-halo: rgba(41, 196, 99, 0.28); }
-.hero-top-now[data-state="multitasking"] { --dot-color: #29c463; --dot-halo: rgba(41, 196, 99, 0.28); }
-@keyframes pulse { 50% { box-shadow: 0 0 0 7px rgba(190,204,36,0); } }
 
-.hero-body { flex: 1; display: flex; flex-direction: column; justify-content: flex-start; padding: 0 88px; margin-top: 16px; min-height: 0; max-width: 1240px; margin-left: auto; margin-right: auto; width: 100%; box-sizing: border-box; }
-
+/* Logo — sits behind portrait */
 .hero-logo-wrap {
-  padding: 28px 0 22px;
-  margin: 4px 0 22px;
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  z-index: 1;
+  padding: 36px 32px 0;
+  pointer-events: none;
 }
 .hero-logo {
   display: block;
   width: 100%;
-  max-width: 900px;
+  max-width: 1100px;
   height: auto;
   margin: 0 auto;
   filter: brightness(0) invert(1);
   overflow: visible;
 }
 
-.hero-grid {
-  display: grid;
-  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
-  gap: 24px 64px;
-  align-items: center;
+/* Portrait — floats over logo */
+.hero-portrait-wrap {
+  position: absolute;
+  bottom: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+  height: 76%;
+  transition: transform 0.4s cubic-bezier(.22,.68,0,1.2);
+  cursor: default;
 }
-.hero-left { display: flex; flex-direction: column; gap: 28px; }
-.hero-card:hover { transform: translate(-2px, -2px); box-shadow: 8px 8px 0 var(--color-wine); }
-.hero-portrait { position: relative; justify-self: end; align-self: center; width: 100%; max-width: 420px; }
-.hero-card { position: relative; max-width: 460px; }
-
-.hero-line {
-  font-family: var(--font-display);
-  font-size: clamp(28px, 3.4vw, 52px);
-  font-weight: 600;
-  line-height: 1.18;
-  letter-spacing: -0.025em;
-  color: var(--color-wine);
-  margin: 0;
-  text-wrap: balance;
+.hero-portrait-wrap:hover {
+  transform: translateX(-52%) rotate(1.5deg) scale(1.03);
 }
-.hero-line em { font-style: italic; font-stretch: 75%; font-weight: 700; color: #fff; }
-.hero-line em .hl { background: transparent; color: #fff; padding: 0; }
-.hero-line .hl {
-  background: var(--color-arctic);
-  color: #471224;
-  padding: 0.04em 0.18em;
-  box-decoration-break: clone;
-  -webkit-box-decoration-break: clone;
-}
-.hero-subline {
-  font-family: var(--font-display);
-  font-style: italic; font-stretch: 85%; font-weight: 400;
-  font-size: clamp(24px, 2.6vw, 38px);
-  line-height: 1.3;
-  color: #fff;
-  margin: -16px 0 0;
-  max-width: 28ch;
-}
-.portrait-frame {
-  position: relative;
-  background: #fff;
-  border: 1.5px solid var(--color-wine);
-  padding: 10px 10px 14px;
-  box-shadow: 6px 6px 0 var(--color-wine);
-  transform: rotate(-1.4deg);
-  transition: transform var(--dur) var(--ease-out);
-}
-.portrait-frame:hover { transform: rotate(0deg) translate(-2px, -2px); }
-.portrait-frame img {
-  display: block; width: 100%; height: auto;
-}
-
-
-.hero-card {
-  background: #fff;
-  border: 1.5px solid var(--color-wine);
-  padding: 22px 24px 18px;
-  box-shadow: 4px 4px 0 var(--color-wine);
-  font-family: var(--font-text);
-  transition: transform var(--dur) var(--ease-out), box-shadow var(--dur) var(--ease-out);
-  font-size: 16px;
-  line-height: 1.55;
-  max-width: 460px;
-  align-self: start;
-}
-.hero-card p { margin: 0 0 8px; }
-.hero-card .label {
-  font-family: var(--font-pixel);
-  font-size: 11px;
-  letter-spacing: 0.16em;
+.hero-portrait-wrap img {
+  height: 100%;
+  width: auto;
   display: block;
-  color: var(--color-wine);
-  background: var(--color-lilac);
-  padding: 3px 6px;
-  width: fit-content;
-  margin-bottom: 12px;
-  text-transform: uppercase;
 }
-.hero-card-sig {
-  font-size: 2em;
-  font-family: var(--font-display);
-  font-style: italic; font-stretch: 85%;
-  color: var(--color-ruby);
-  font-size: 17px !important;
-  margin-top: 10px !important;
-}
-.hero-card-sig .pixel { color: var(--color-chartreuse); margin-left: 4px; }
 
-.hero-foot {
-  display: flex; justify-content: center; align-items: center;
-  padding: 32px 88px 0;
-  max-width: 1240px;
-  margin-left: auto;
-  margin-right: auto;
-  width: 100%;
-  box-sizing: border-box;
+/* Callout boxes */
+.hero-callout {
+  position: absolute;
+  z-index: 2;
+  border: 1.5px solid var(--color-blue);
+  padding: 10px 14px;
+  font-family: var(--font-pixel);
+  font-size: 13px;
+  color: var(--color-blue);
+  line-height: 1.5;
+  max-width: 200px;
+  user-select: text;
+  /* animation — starts hidden, slides out on hover */
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 0.42s cubic-bezier(.34,1.2,.64,1), opacity 0.28s ease;
 }
-.hero-foot .scroll-hint { display: inline-flex; flex-direction: column; align-items: center; gap: 6px; }
-.hero-foot .scroll-hint .arrow {
+.hero-callout.callout-visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+.hero-callout p { margin: 0; }
+
+/* Callout lines extending toward portrait — draw in after box appears */
+.hero-callout-left::after {
+  content: "";
+  position: absolute;
+  right: -22px; top: 50%;
+  width: 0; height: 1.5px;
+  background: var(--color-blue);
+  transition: width 0.22s ease 0.28s;
+}
+.hero-callout-left.callout-visible::after { width: 18px; }
+
+.hero-callout-right::before {
+  content: "";
+  position: absolute;
+  left: -22px; top: 50%;
+  width: 0; height: 1.5px;
+  background: var(--color-blue);
+  transition: width 0.22s ease 0.28s;
+}
+.hero-callout-right.callout-visible::before { width: 18px; }
+
+/* Hover zones on portrait */
+.hover-zone {
+  position: absolute;
+  left: 0; right: 0;
+  z-index: 5;
+  cursor: default;
+}
+.hover-zone-baby { top: 0; height: 40%; }
+.hover-zone-mom  { top: 40%; bottom: 0; }
+
+/* Socks */
+.hero-socks {
+  position: absolute;
+  right: 12%; bottom: 12%;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+}
+.hero-socks-icons {
+  display: flex;
+  gap: 8px;
+  align-items: flex-end;
+}
+.sock-icon { width: 56px; height: auto; cursor: pointer; }
+.sock-blue { animation: sockbuzz1 2.9s ease-in-out infinite; }
+.sock-pink { width: 48px; animation: sockbuzz2 3.3s ease-in-out infinite; }
+@keyframes sockbuzz1 {
+  0%,100% { transform: rotate(-5deg) translate(0,0); }
+  25%      { transform: rotate(-3deg) translate(3px,-4px); }
+  50%      { transform: rotate(-6deg) translate(-2px,3px); }
+  75%      { transform: rotate(-4deg) translate(4px,1px); }
+}
+@keyframes sockbuzz2 {
+  /* scaleX(-1) baked in to flip pink sock */
+  0%,100% { transform: scaleX(-1) rotate(8deg) translate(0,0); }
+  25%      { transform: scaleX(-1) rotate(6deg) translate(-3px,3px); }
+  50%      { transform: scaleX(-1) rotate(9deg) translate(2px,-3px); }
+  75%      { transform: scaleX(-1) rotate(7deg) translate(-4px,-1px); }
+}
+.mom-of-two {
+  font-family: var(--font-pixel);
+  font-size: 12px;
+  color: rgba(255,255,255,0.85);
+  cursor: pointer;
+  letter-spacing: 0.03em;
+  text-decoration: none;
+  transition: color 0.15s, text-decoration 0.15s;
+}
+.mom-of-two:hover { color: var(--color-blue); text-decoration: underline; }
+
+/* Terminal */
+.hero-terminal {
+  position: absolute;
+  left: 14%; bottom: 12%;
+  z-index: 2;
+  width: 310px;
+  background: #f2f1ec;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 5px 5px 0 rgba(0,0,0,0.12);
+}
+.terminal-titlebar {
+  background: #dddbd4;
+  padding: 7px 12px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.terminal-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+.terminal-dot.red    { background: #ff5f57; }
+.terminal-dot.yellow { background: #febc2e; }
+.terminal-dot.green  { background: #28c840; }
+.terminal-filename {
+  margin-left: auto;
+  font-family: var(--font-pixel);
+  font-size: 10px;
+  color: #999;
+  letter-spacing: 0.06em;
+}
+.terminal-body {
+  padding: 12px 14px;
+  font-family: 'Courier New', monospace;
+  font-size: 11px;
+  line-height: 1.75;
+  color: #2a2a2a;
+  user-select: text;
+}
+.terminal-body p { margin: 0; }
+.terminal-prompt { color: #2c4f88; font-weight: 700; }
+.terminal-indent { padding-left: 18px; color: #2c4f88; }
+.terminal-cursor {
+  display: inline-block;
+  width: 7px; height: 13px;
+  background: #2a2a2a;
+  vertical-align: middle;
+  margin-left: 2px;
+  animation: blink 1.1s step-start infinite;
+}
+@keyframes blink { 0%,100% { opacity: 1; } 50% { opacity: 0; } }
+
+/* Status dot */
+.hero-status {
+  position: absolute;
+  top: 18px; right: 24px;
+  z-index: 5;
+  display: inline-flex; align-items: center; gap: 10px;
+  font-family: var(--font-ui);
+  font-size: 12px; letter-spacing: 0.14em;
+  text-transform: uppercase; font-weight: 600;
+  color: rgba(255,255,255,0.85);
+}
+.hero-status .dot {
+  display: inline-block; width: 8px; height: 8px; border-radius: 50%;
+  background: var(--dot-color, var(--color-wine));
+  box-shadow: 0 0 0 3px var(--dot-halo, rgba(71,18,36,.25));
+  animation: pulse 1.6s ease-in-out infinite;
+}
+.hero-status[data-state="sleeping"]     { --dot-color: #ff3b30; --dot-halo: rgba(255,59,48,.28); }
+.hero-status[data-state="napping"]      { --dot-color: #29c463; --dot-halo: rgba(41,196,99,.28); }
+.hero-status[data-state="multitasking"] { --dot-color: #29c463; --dot-halo: rgba(41,196,99,.28); }
+
+/* Bounce arrow */
+.hero-arrow-wrap {
+  position: absolute;
+  bottom: 24px; left: 50%;
+  transform: translateX(-50%);
+  z-index: 4;
+  cursor: pointer;
+  padding: 8px;
+}
+.hero-arrow {
+  display: block;
   width: 0; height: 0;
   border-left: 11px solid transparent;
   border-right: 11px solid transparent;
-  border-top: 16px solid var(--color-arctic);
-  animation: bob 1.8s ease-in-out infinite;
+  border-top: 16px solid rgba(255,255,255,1);
+  animation: bob 1.6s ease-in-out infinite;
 }
-@keyframes bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(6px); } }
+@keyframes bob {
+  0%,100% { transform: translateY(0); }
+  50%      { transform: translateY(8px); }
+}
+
+/* Kids popup — floats above socks */
+.kids-popup {
+  position: absolute;
+  bottom: calc(100% + 12px);
+  right: 0;
+  width: 220px;
+  z-index: 10;
+  animation: kidsPopUp 0.36s cubic-bezier(.34,1.3,.64,1) both;
+  transform-origin: bottom right;
+}
+@keyframes kidsPopUp {
+  from { opacity: 0; transform: translateY(16px) scale(0.88); }
+  to   { opacity: 1; transform: translateY(0)    scale(1); }
+}
+.kids-popup img {
+  display: block;
+  width: 100%;
+  border: 3px solid #fff;
+  border-radius: 2px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.28);
+}
+.kids-popup-close {
+  position: absolute;
+  top: -10px; right: -10px;
+  width: 24px; height: 24px;
+  background: var(--color-wine);
+  color: #fff; border: none; border-radius: 50%;
+  font-size: 18px; cursor: pointer; line-height: 1;
+  display: flex; align-items: center; justify-content: center;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .hero-callout { position: static; max-width: 100%; margin: 8px 16px; border: none; padding: 0; font-size: 12px; }
+  .hero-callout::after, .hero-callout::before { display: none; }
+  .hero-callout-left, .hero-callout-right { text-align: left; }
+  .hero-portrait-wrap { height: 70%; }
+  .hero-terminal { left: 2%; bottom: 4%; width: 220px; }
+  .hero-terminal .terminal-body { font-size: 9px; padding: 8px 10px; }
+  .hero-socks { right: 2%; bottom: 6%; }
+  .sock-icon { width: 40px; }
+}
+
 
 /* =====================================================
    WORK — editorial spreads + archive list
@@ -478,14 +568,14 @@ a {
   max-width: 360px;
   width: 100%;
   margin: 0 auto;
-  border: 2.5px solid var(--color-wine);
-  box-shadow: 8px 8px 0 var(--color-wine);
-  background: var(--color-wine);
+  border: 2.5px solid var(--color-blue);
+  box-shadow: 8px 8px 0 var(--color-blue);
+  background: var(--color-blue);
   overflow: hidden;
   transition: transform var(--dur) var(--ease-out), box-shadow var(--dur) var(--ease-out);
 }
-.spread-video:hover { transform: translate(-2px, -2px); box-shadow: 12px 12px 0 var(--color-wine); }
-.spread-video:active { transform: translate(4px, 4px); box-shadow: 2px 2px 0 var(--color-wine); }
+.spread-video:hover { transform: translate(-2px, -2px); box-shadow: 12px 12px 0 var(--color-blue); }
+.spread-video:active { transform: translate(4px, 4px); box-shadow: 2px 2px 0 var(--color-blue); }
 .spread-video .surface {
   position: absolute; inset: 0;
   background-position: center;
@@ -522,8 +612,8 @@ a {
   transform: translate(-50%, -50%);
   width: 96px; height: 96px;
   background: rgba(255,255,255,0.82);
-  border: 2.5px solid var(--color-wine);
-  box-shadow: 4px 4px 0 var(--color-wine);
+  border: 2.5px solid var(--color-blue);
+  box-shadow: 4px 4px 0 var(--color-blue);
   display: flex; align-items: center; justify-content: center;
   cursor: pointer;
   z-index: 2;
@@ -531,11 +621,11 @@ a {
 }
 .spread-video .play-button:hover {
   transform: translate(calc(-50% - 2px), calc(-50% - 2px));
-  box-shadow: 6px 6px 0 var(--color-wine);
+  box-shadow: 6px 6px 0 var(--color-blue);
 }
 .spread-video .play-button:active {
   transform: translate(calc(-50% + 4px), calc(-50% + 4px));
-  box-shadow: 0 0 0 var(--color-wine);
+  box-shadow: 0 0 0 var(--color-blue);
 }
 .spread-video .play-button .triangle {
   width: 0; height: 0;
@@ -1356,63 +1446,124 @@ window.MiniBar = MiniBar;
 <script type="text/babel">
 // Hero — preserved from prior pass. Do not redesign.
 function Hero() {
-  const computeStatus = () => {
-    const h = new Date().getHours();
-    if (h >= 21 || h < 7) return { state: "sleeping",     label: "SLEEPING" };
-    if (h >= 7 && h < 12) return { state: "napping",      label: "BABY NAPPING" };
-    return                       { state: "multitasking", label: "MULTITASKING" };
-  };
-  const [status, setStatus] = React.useState(computeStatus);
+  const heroRef    = React.useRef(null);
+  const portraitRef = React.useRef(null);
+  const [pRect, setPRect] = React.useState(null);
+  const [hovered, setHovered] = React.useState(false);
+  const [modalOpen, setModalOpen] = React.useState(false);
+
+  // Measure portrait position relative to hero, rerun on any resize
   React.useEffect(() => {
-    const t = setInterval(() => setStatus(computeStatus()), 60000);
-    return () => clearInterval(t);
+    function measure() {
+      if (!heroRef.current || !portraitRef.current) return;
+      const h = heroRef.current.getBoundingClientRect();
+      const p = portraitRef.current.getBoundingClientRect();
+      setPRect({
+        left:   p.left  - h.left,
+        right:  p.right - h.left,
+        leftY:  (p.top  - h.top) + p.height * 0.20,  // near the baby
+        rightY: (p.top  - h.top) + p.height * 0.50,  // mid-body
+        heroW:  h.width,
+      });
+    }
+    measure();
+    const ro = new ResizeObserver(measure);
+    if (heroRef.current) ro.observe(heroRef.current);
+    window.addEventListener('resize', measure);
+    return () => { ro.disconnect(); window.removeEventListener('resize', measure); };
   }, []);
 
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 769;
+  const LINE_GAP = 22; // px from portrait edge to line end
+
+  // Left callout: anchored so its right edge sits LINE_GAP left of portrait, positioned near baby
+  const leftStyle = (!isMobile && pRect) ? {
+    right: `${pRect.heroW - pRect.left + LINE_GAP}px`,
+    top:   `${pRect.leftY}px`,
+    transform: hovered ? 'translateX(0) translateY(-50%)' : 'translateX(36px) translateY(-50%)',
+  } : {};
+
+  // Right callout: anchored so its left edge sits LINE_GAP right of portrait, positioned mid-body
+  const rightStyle = (!isMobile && pRect) ? {
+    left:  `${pRect.right + LINE_GAP}px`,
+    top:   `${pRect.rightY}px`,
+    textAlign: 'left',
+    transform: hovered ? 'translateX(0) translateY(-50%)' : 'translateX(-36px) translateY(-50%)',
+  } : {};
 
   return (
-    <section className="hero" id="home" data-screen-label="01 Hero">
-      <div className="hero-top">
+    <section className="hero" id="home" data-screen-label="01 Hero" ref={heroRef}>
 
-
+      {/* Logo — behind portrait */}
+      <div className="hero-logo-wrap">
+        <img className="hero-logo" src={window.__resources?.heroLogoSvg || "assets/logo.svg"} alt="AI@homemom" />
       </div>
 
-      <div className="hero-body">
-        <div className="hero-logo-wrap">
-          <img
-            className="hero-logo"
-            src={window.__resources?.heroLogoSvg || "assets/AIathomemom-color.svg"}
-            alt="AI@homemom" />
-        </div>
+      {/* Portrait — hover zones trigger callouts */}
+      <div className="hero-portrait-wrap" ref={portraitRef}>
+        <img src="assets/portrait.png" alt="chandler" />
+        <div className="hover-zone hover-zone-baby"
+          onMouseEnter={() => setHovered(true)}
+          onMouseLeave={() => setHovered(false)} />
+        <div className="hover-zone hover-zone-mom"
+          onMouseEnter={() => setHovered(true)}
+          onMouseLeave={() => setHovered(false)} />
+      </div>
 
-        <div className="hero-grid">
-          <div className="hero-left">
-            <h1 className="hero-line">
-              <span className="hl">ex-ad-creative turned<br className="mobile-br" /> stAI-at-home-mom.</span>
-            </h1>
-            <p className="hero-subline">
-              building apps* during naps.
-              <br /><small style={{fontSize: "0.45em", opacity: 0.75, fontStyle: "normal", fontFamily: "var(--font-ui)", letterSpacing: "0.02em", fontWeight: 700}}>*and other stuff.</small>
-            </p>
+      {/* Left callout */}
+      <div className={`hero-callout hero-callout-left${hovered ? ' callout-visible' : ''}`} style={leftStyle}>
+        <p>building apps during naps.</p>
+      </div>
 
-            <aside className="hero-card">
-              <span className="label">from my kitchen table</span>
-              <p>i was in advertising for a decade. now i use ai to build real things — activities for my family, things that make our days a little easier, &amp; whatever else i dream up. i film it so other moms can see what's possible.</p>
-              <p className="hero-card-sig" style={{color:"var(--color-lilac)"}}>
-                — chandler
-              </p>
-            </aside>
+      {/* Right callout */}
+      <div className={`hero-callout hero-callout-right${hovered ? ' callout-visible' : ''}`} style={rightStyle}>
+        <p>ex-ad-creative turned stAI-at-home-mom.</p>
+      </div>
+
+      {/* Socks + mom-of-two */}
+      <div className="hero-socks">
+        {modalOpen && (
+          <div className="kids-popup">
+            <button className="kids-popup-close" onClick={() => setModalOpen(false)}>×</button>
+            <img src="assets/kids-photo.jpg" alt="my kids" />
           </div>
+        )}
+        <div className="hero-socks-icons">
+          <img src="assets/sock-blue.png" className="sock-icon sock-blue" alt="" onClick={() => setModalOpen(!modalOpen)} />
+          <img src="assets/sock-pink.png" className="sock-icon sock-pink" alt="" onClick={() => setModalOpen(!modalOpen)} />
+        </div>
+        <span className="mom-of-two" onClick={() => setModalOpen(!modalOpen)}>mom-of-two.jpg</span>
+      </div>
 
-          <aside className="hero-portrait">
-            <div className="portrait-frame">
-              <img src={window.__resources?.portraitPhoto || "assets/photos/portrait.png"} alt="chandler lying on the grass with camera equipment" />
-            </div>
-          </aside>
+      {/* Terminal */}
+      <div className="hero-terminal">
+        <div className="terminal-titlebar">
+          <span className="terminal-dot red"></span>
+          <span className="terminal-dot yellow"></span>
+          <span className="terminal-dot green"></span>
+          <span className="terminal-filename">about.sh</span>
+        </div>
+        <div className="terminal-body">
+          <p><span className="terminal-prompt">chandler@ai-at-home-mom:~$</span> cat about.txt</p>
+          <p>i was in advertising for a decade.</p>
+          <p>now i use ai to build real things —</p>
+          <p className="terminal-indent">activities for my family,</p>
+          <p className="terminal-indent">things that make our days a little easier,</p>
+          <p className="terminal-indent">&amp; whatever else i dream up.</p>
+          <p>i film it so other moms can see what's possible.</p>
+          <p><span className="terminal-prompt">chandler@ai-at-home-mom:~$</span><span className="terminal-cursor"></span></p>
         </div>
       </div>
 
-    </section>);
 
+      {/* Bounce arrow — click to scroll to work section */}
+      <div className="hero-arrow-wrap" onClick={() => document.getElementById('work')?.scrollIntoView({ behavior: 'smooth' })}>
+        <span className="hero-arrow"></span>
+      </div>
+
+
+    </section>
+  );
 }
 window.Hero = Hero;
 </script>
