@@ -328,6 +328,7 @@ a {
 .terminal-body p { margin: 0; }
 .terminal-prompt { color: #2c4f88; font-weight: 700; }
 .terminal-indent { padding-left: 18px; color: #2c4f88; }
+.terminal-sign { display: none; }
 .terminal-cursor {
   display: inline-block;
   width: 7px; height: 13px;
@@ -522,6 +523,7 @@ a {
   .terminal-body p:nth-child(6) { animation-delay: 1.35s; }
   .terminal-body p:nth-child(7) { animation-delay: 1.5s; }
   .terminal-body p:last-child   { display: none; }
+  .terminal-sign { display: block; margin-top: 6px; font-style: italic; opacity: 0.85; animation: fadeUp 0.6s ease both 1.65s; }
 
   /* Hide socks, hover zones, arrow, left callout */
   .hero-socks,
@@ -1679,10 +1681,11 @@ function Hero() {
           <p><span className="terminal-prompt">chandler@ai-at-home-mom:~$</span> cat about.txt</p>
           <p>i was in advertising for a decade.</p>
           <p><span className="terminal-now">now </span>i use ai to build real things —</p>
-          <p className="terminal-indent">activities for my family,</p>
+          <p className="terminal-indent">activities for my kids,</p>
           <p className="terminal-indent">things that make our days a little easier,</p>
           <p className="terminal-indent">&amp; whatever else i dream up.</p>
           <p>i film it so other moms can see what's possible.</p>
+          <p className="terminal-sign">— chandler</p>
           <p><span className="terminal-prompt">chandler@ai-at-home-mom:~$</span><span className="terminal-cursor"></span></p>
         </div>
       </div>
@@ -1890,7 +1893,7 @@ function Work() {
             things i'm <span className="hl">building</span> &amp; <span className="hl">filming</span> between wake windows.
           </h2>
           <p className="work-masthead-dek">
-            a portfolio of shipped apps, experiments, and video walkthroughs. all while juggling motherhood. <em>see for yourself what's possible.</em>
+            a portfolio of shipped apps, experiments, and video walkthroughs. <em>see for yourself what's possible.</em>
           </p>
         </header>
 
